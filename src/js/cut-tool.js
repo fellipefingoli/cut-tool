@@ -1,4 +1,7 @@
-var cutTool = function(canvas){
+"use strict"
+
+//constructor
+var CutTool = function(canvas){
 	this.canvasImg = canvas
 	this.canvas = document.createElement('canvas');
 	this.canvas.width = canvas.width;
@@ -13,7 +16,8 @@ var cutTool = function(canvas){
 	this.ctx = 	this.canvas.getContext('2d');
 }
 
-cutTool.prototype.enableSelect = function(){
+//public
+CutTool.prototype.enableSelect = function(){
 	var that = this;
 	this.mouseDown = false;
 	this.raf(this);
@@ -36,11 +40,11 @@ cutTool.prototype.enableSelect = function(){
 	});
 }
 
-cutTool.prototype.disableSelect = function(){
+CutTool.prototype.disableSelect = function(){
 	
 }
 
-cutTool.prototype.cutImage = function(){
+CutTool.prototype.cutImage = function(){
 	var imgData = this.ctx.getImageData(0,0,this.canvas.width,this.canvas.height);
 	var imgDataImg = this.ctxImg.getImageData(0,0,this.canvas.width,this.canvas.height);
 
@@ -56,7 +60,7 @@ cutTool.prototype.cutImage = function(){
 	this.ctxImg.putImageData(imgDataImg,0,0);
 }
 
-cutTool.prototype.raf = function(that){
+CutTool.prototype.raf = function(that){
 	that.rafId = window.requestAnimationFrame(function(){
 		that.raf(that);		
 	});
