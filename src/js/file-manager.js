@@ -3,8 +3,6 @@
 var FileManager = function(input,callback){
 	var that = this;
 	this.input = input;
-	
-	
 }
 
 FileManager.prototype.upload = function(callback){
