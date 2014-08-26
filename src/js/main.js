@@ -12,18 +12,16 @@ document.addEventListener("DOMContentLoaded", function(e){
 	fileManager.upload(function(fileData){
 		var img = new Image();
 		img.onload = function(e){
-			ctx.drawImage(img,0,0);
+			ctx.drawImage(img,0,0,canvas.width,canvas.height);
 		}
 		img.src = fileData;
 	});
 
+	var cutImage;
 	//cut tool button
 	var cutButton = document.getElementById("cut");
 	cutButton.addEventListener("click",function(e){
 		cutImage = cutTool.cutImage();
-		//crop tool
-		var cropTool = new CropTool(cutImage);
-		cropTool.transparence();
 	})
 
 	
@@ -32,9 +30,11 @@ document.addEventListener("DOMContentLoaded", function(e){
 	//paste tool button
 	var pasteCanvas = document.getElementById("canvas2")	
 	var pasteButton = document.getElementById("paste");
+	var cropTool = new CropTool(pasteCanvas);
 	pasteTool = new PasteTool(pasteCanvas);
 	pasteButton.addEventListener("click",function(e){
-		cutTool.pasteImage(pasteCanvas);
+		pasteTool.pasteImage(cutImage);
+		cropTool.cropArea("transparence");
 	})
 	
 });
